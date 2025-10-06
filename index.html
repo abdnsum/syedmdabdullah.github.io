@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Md Abdullah - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Theming */
+        :root {
+            --primary-color: #28a745;  /* Green accent for dark theme */
+            --primary-hover: #218838;
+            --bg-primary: #121212;     /* Dark base */
+            --bg-secondary: #1e1e1e;   /* Slightly lighter dark */
+            --bg-card: #2d2d2d;        /* Card backgrounds */
+            --text-primary: #e0e0e0;   /* Light text */
+            --text-secondary: #a0a0a0; /* Subtext */
+            --text-white: #fff;
+            --border-color: #444;
+            --shadow: 0 2px 10px rgba(255,255,255,0.05);
+            --hero-overlay: rgba(0,0,0,0.7);  /* Darker overlay for hero */
+        }
+
+        /* Light Theme Overrides (default is dark; toggle to light) */
+        body.light-theme {
+            --primary-color: #007bff;  /* Blue for light */
+            --primary-hover: #0056b3;
+            --bg-primary: #f4f4f4;
+            --bg-secondary: #fff;
+            --bg-card: #fff;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-white: #fff;
+            --border-color: #ddd;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --hero-overlay: rgba(0,0,0,0.5);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s, color 0.3s;  /* Smooth theme switch */
+        }
+        body.light-theme {
+            background-color: var(--bg-primary);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* Header/Navigation */
+        header {
+            background: var(--bg-secondary);
+            color: var(--text-white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav-links a:hover {
+            background: var(--border-color);
+        }
+        #themeToggle {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            background: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('https://via.placeholder.com/1920x1080?text=Digital+Marketing+Hero') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-white);
+        }
+        #home h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background: var(--primary-color);
+            color: var(--text-white);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-secondary);
+        }
+        #about p {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-primary);
+        }
+
+        /* Skills Section */
+        #skills {
+            background: var(--bg-primary);
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        .skill-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        .skill-item h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .skill-item p {
+            color: var(--text-secondary);
+        }
+
+        /* Projects Section */
+        #projects {
+            background: var(--bg-secondary);
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .project-card-content {
+            padding: 1.5rem;
+        }
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .project-card p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .project-links a {
+            background: var(--primary-color);
+            color: var(--text-white);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .project-links a:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg-primary);
+            text-align: center;
+        }
+        #contact p {
+            color: var(--text-secondary);
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        input, textarea {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        input::placeholder, textarea::placeholder {
+            color: var(--text-secondary);
+        }
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        button {
+            background: var(--primary-color);
+            color: var(--text-white);
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            #home h1 {
+                font-size: 2rem;
+            }
+            section {
+                padding: 3rem 1rem;
+            }
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="dark-theme">  <!-- Starts in dark theme; toggle to light-theme -->
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Syed Md Abdullah</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="themeToggle">☀️</button>  <!-- Starts as sun (for dark mode) -->
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <h1>Welcome to My Portfolio</h1>
+        <p>I'm a passionate Digital Marketing Expert driving growth through innovative strategies.</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            Hi, I'm Syed Md Abdullah, a Digital Marketing Expert with 5 years of experience in the field. 
+            I specialize in SEO, PPC campaigns, social media marketing, and content strategy to boost brand visibility and ROI. 
+            When I'm not optimizing campaigns, you can find me exploring new trends or networking at industry events. 
+            Let's collaborate to elevate your digital presence!
+        </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <h3>SEO & SEM</h3>
+                <p>Optimizing websites for search engines and managing paid search campaigns with Google Ads.</p>
+            </div>
+            <div class="skill-item">
+                <h3>Social Media Marketing</h3>
+                <p>Creating engaging content and strategies for platforms like Facebook, Instagram, and LinkedIn.</p>
+            </div>
+            <div class="skill-item">
+                <h3>Google Analytics</h3>
+                <p>Tracking performance, analyzing data, and deriving insights to refine marketing efforts.</p>
+            </div>
+            <div class="skill-item">
+                <h3>Content Marketing</h3>
+                <p>Developing compelling content strategies, email newsletters, and lead generation funnels.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x200?text=SEO+Campaign" alt="Project 1">
+                <div class="project-card-content">
+                    <h3>SEO Optimization Campaign</h3>
+                    <p>Led an SEO overhaul for an e-commerce client, increasing organic traffic by 150% in 6 months using keyword research and on-page optimization.</p>
+                    <div class="project-links">
+                        <a href="https://your-demo-url.com" target="_blank">Case Study</a>
+                        <a href="https://github.com/yourusername/seo-campaign" target="_blank">Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x200?text=Social+Media+Strategy" alt="Project 2">
+                <div class="project-card-content">
+                    <h3>Social Media Growth Strategy</h3>
+                    <p>Developed a multi-platform campaign for a startup, growing followers by 200% and generating 500+ leads through targeted ads and content.</p>
+                    <div class="project-links">
+                        <a href="https://your-demo-url.com" target="_blank">Case Study</a>
+                        <a href="https://github.com/yourusername/social-strategy" target="_blank">Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x200?text=Email+Marketing" alt="Project 3">
+                <div class="project-card-content">
+                    <h3>Email Marketing Automation</h3>
+                    <p>Built an automated email funnel using Mailchimp for a B2B client, achieving a 35% open rate and 15% conversion increase.</p>
+                    <div class="project-links">
+                        <a href="https://your-demo-url.com" target="_blank">Case Study</a>
+                        <a href="https://github.com/yourusername/email-campaign" target="_blank">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Got a project in mind? Let's chat!</p>
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Syed Md Abdullah. All rights reserved. | Email: syednabdullah@gmail.com | LinkedIn: linkedin.com/in/syedmdabdullah</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
+            themeToggle.textContent = '🌙';  // Moon for light mode
+        } else {
+            body.classList.add('dark-theme');  // Default dark
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            body.classList.toggle('light-theme');
+            if (body.classList.contains('dark-theme')) {
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Simple form submission handler (demo)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent! (Demo—integrate EmailJS or Formspree for real emails.)');
+            this.reset();
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(30, 30, 30, 0.95)';  // Adjust for dark/light if needed
+            } else {
+                header.style.background = 'var(--bg-secondary)';
+            }
+        });
+    </script>
+</body>
+</html>
